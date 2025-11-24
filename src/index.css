@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Custom Theme */
+@plugin "daisyui/theme" {
+  name: "mytheme";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  /* Base (white/grey neutrals) */
+  --color-base-100: #ffffff;
+  --color-base-200: #606060; /*gray*/
+  --color-base-300: #03373d; /*dark blue*/
+  --color-base-content: #1b3a2f;
+
+  /* Primary (brand green highlight) */
+  --color-primary: #caeb66; /* bright lime green */
+  --color-primary-content: #03373d; /* deep teal */
+
+  /* Secondary (light green / illustrations) */
+  --color-secondary: #c2e57e; /* pale lime green */
+  --color-secondary-content: #1b3a2f; /* dark teal/forest green */
+
+  /* Accent (yellow marker/pins) */
+  --color-accent: #ffd53d; /* yellow */
+  --color-accent-content: #1b3a2f; /* dark teal/forest green */
+
+  /* Neutral (deep teal section backgrounds) */
+  --color-neutral: #0a3d46; /* deep teal */
+  --color-neutral-content: #ffffff; /* white */
+
+  /* Supporting roles */
+  --color-info: #7dbb42; /* medium green */
+  --color-success: #9ac732; /* bright lime green */
+  --color-warning: #ffd53d; /* yellow */
+  --color-error: #e74c3c; /* red */
+
+  /* Rounded sizes */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.35rem;
+  --radius-box: 0.75rem;
+
+  /* Input/button padding */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border thickness */
+  --border: 1px;
+
+  /* UI effects */
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Typography */
+body {
+  font-family: "Urbanist", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-color: #eaeced;
+}
+.btn-primary{
+  @apply btn btn-primary
+}
+.page-body {
+  @apply bg-base-100 min-h-screen mt-8 rounded-4xl px-28 py-20;
+}
+.page-title {
+  @apply font-extrabold text-6xl text-base-300 mb-4;
+}
