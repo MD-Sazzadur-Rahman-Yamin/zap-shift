@@ -55,8 +55,8 @@ const SendParcel = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(data);
-        //save the info to the db                // res
-        axiosSecure.post("/parcels",data).then(() => {
+        //save the info to the db            // res
+        axiosSecure.post("/parcels", data).then(() => {
           Swal.fire({
             title: "Canceled!",
             text: "Your order has been canceled.",
