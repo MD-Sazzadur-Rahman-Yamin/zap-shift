@@ -12,6 +12,7 @@ import BeARider from "../Pages/BeARider/BeARider";
 import SendParcel from "../Pages/SendParcel/SendParcel";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import MyParcels from "../Pages/Dashboard/MyParcels/MyParcels";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "my-parcels",
-        Component:MyParcels
+        Component: MyParcels,
+      },
+      {
+        path: "payment/:parcelId",
+        Component:Payment
       },
     ],
   },

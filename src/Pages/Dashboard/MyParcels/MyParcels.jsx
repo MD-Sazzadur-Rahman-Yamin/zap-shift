@@ -69,9 +69,16 @@ const MyParcels = () => {
                 <td>{parcel.cost}</td>
                 <td>
                   {parcel.paymentStatus === "paid" ? (
-                    <span className="badge badge-outline badge-success">Paid</span>
+                    <span className="badge badge-outline badge-success">
+                      Paid
+                    </span>
                   ) : (
-                    <Link to='' className="btn btn-primary btn-sm">Pay</Link>
+                    <Link
+                      to={`/dashboard/payment/${parcel._id}`}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Pay
+                    </Link>
                   )}
                 </td>
                 <td>{parcel.deliveryStatus}</td>
