@@ -25,6 +25,7 @@ const SendParcel = () => {
     const districts = regionDistricts.map((d) => d.district);
     return districts;
   };
+  
   const handleSendParcel = (data) => {
     const isDocument = data.parcelType === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
@@ -44,6 +45,7 @@ const SendParcel = () => {
         cost = minCharge + extraCharge;
       }
     }
+    data.cost = cost;
     Swal.fire({
       title: "Agree with the cost?",
       text: `You will be charged ${cost} BDT`,
