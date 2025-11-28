@@ -52,15 +52,12 @@ const router = createBrowserRouter([
         ),
         loader: () => fetch("/warehouses.json").then((res) => res.json()),
       },
-      {
-        path: "*",
-        Component: Error,
-      },
     ],
   },
   {
     path: "/",
     Component: AuthLayout,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "login",
@@ -79,6 +76,7 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRouter>
     ),
+    errorElement: <Error></Error>,
     children: [
       {
         path: "my-parcels",
@@ -94,7 +92,7 @@ const router = createBrowserRouter([
       },
       {
         path: "payment-cancelled",
-        Component:PaymentCancelled,
+        Component: PaymentCancelled,
       },
     ],
   },
