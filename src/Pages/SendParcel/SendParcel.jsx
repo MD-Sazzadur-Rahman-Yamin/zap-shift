@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 
 const SendParcel = () => {
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const {
@@ -25,7 +26,7 @@ const SendParcel = () => {
     const districts = regionDistricts.map((d) => d.district);
     return districts;
   };
-  
+
   const handleSendParcel = (data) => {
     const isDocument = data.parcelType === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
@@ -53,17 +54,22 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "I agree!",
+      confirmButtonText: "Conform and Continue Payment!",
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(data);
         //save the info to the db            // res
-        axiosSecure.post("/parcels", data).then(() => {
-          Swal.fire({
-            title: "Canceled!",
-            text: "Your order has been canceled.",
-            icon: "success",
-          });
+        axiosSecure.post("/parcels", data).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Parcel has created. Pleace Pay.",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            navigate("/dashboard/my-parcels");
+          }
         });
       }
     });
