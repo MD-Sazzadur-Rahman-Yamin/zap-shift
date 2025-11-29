@@ -24,13 +24,15 @@ const BeARider = () => {
     return districts;
   };
   const RiderRegion = useWatch({ control, name: "region" });
-const handleBeARider = (data) => {
-  axiosSecure.post("/riders", data).then((res) => {
-    if (res.data.insertedId) {
-      toast("Your application has been submitted. We will reach you in 7 days");
-    }
-  });
-};
+  const handleBeARider = (data) => {
+    axiosSecure.post("/riders", data).then((res) => {
+      if (res.data.insertedId) {
+        toast(
+          "Your application has been submitted. We will reach you in 7 days"
+        );
+      }
+    });
+  };
 
   return (
     <div className="page-body">
