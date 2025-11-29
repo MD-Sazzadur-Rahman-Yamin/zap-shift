@@ -4,19 +4,22 @@ import useAuth from "../../../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Register = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
   const { registerUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const axiosSecure = useAxiosSecure();
+
   const handleRegister = (data) => {
     const profileImg = data.photo[0];
-
+    // register user
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result);
@@ -27,13 +30,25 @@ const Register = () => {
           import.meta.env.VITE_img_host_key
         }`;
         axios.post(img_api_url, fromData).then((res) => {
+          const photoURL = res.data.data.url;
+          //create user in database
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then(res=>{
+            if(res.data.insertedId){
+              console.log('user created in database')
+            }
+          });
           //update user profile
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
-          updateUserProfile(userProfile).then(()=>{
-            navigate(location.state|| '/')
+          updateUserProfile(userProfile).then(() => {
+            navigate(location.state || "/");
           });
         });
       })
@@ -41,6 +56,7 @@ const Register = () => {
         console.log(error);
       });
   };
+
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">

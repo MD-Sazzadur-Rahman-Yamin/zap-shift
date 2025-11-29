@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
+console.log(user)
   const { data: payments = [] } = useQuery({
     queryKey: ["payments", user.email],
     queryFn: async () => {
@@ -26,6 +26,7 @@ const PaymentHistory = () => {
               <th>#</th>
               <th>Name</th>
               <th>Amount</th>
+              <th>Paid Time</th>
               <th>Transaction ID</th>
             </tr>
           </thead>
@@ -36,6 +37,7 @@ const PaymentHistory = () => {
                 <th>{i + 1}</th>
                 <td>Cy Ganderton</td>
                 <td>{p.amount} BDT</td>
+                <td>{p.paidAt}</td>
                 <td>{p.transactionId}</td>
               </tr>
             ))}
