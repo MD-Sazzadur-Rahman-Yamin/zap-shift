@@ -57,7 +57,6 @@ const SendParcel = () => {
       confirmButtonText: "Conform and Continue Payment!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(data);
         //save the info to the db            // res
         axiosSecure.post("/parcels", data).then((res) => {
           if (res.data.insertedId) {

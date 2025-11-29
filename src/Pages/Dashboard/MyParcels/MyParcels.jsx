@@ -18,7 +18,6 @@ const MyParcels = () => {
     },
   });
   const handleDeleatParcle = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -30,7 +29,6 @@ const MyParcels = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure(`/parcels/${id}`).then((res) => {
-          console.log(res.data);
           if (res.data.deletedCount) {
             refetch()
             Swal.fire({

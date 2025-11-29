@@ -2,6 +2,8 @@ import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { GrCreditCard } from "react-icons/gr";
 import { Link, NavLink, Outlet } from "react-router";
+import { LuBike } from "react-icons/lu";
+import { ToastContainer } from "react-toastify";
 
 const DashboardLayout = () => {
   return (
@@ -96,13 +98,22 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
-            {/* List item */}
             <li>
+              <NavLink
+                to="/dashboard/approve-riders"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Approve Riders"
+              >
+                <LuBike />
+                <span className="is-drawer-close:hidden">Approve Riders</span>
+              </NavLink>
+            </li>
+            {/* List item */}
+            {/* <li>
               <button
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Settings"
               >
-                {/* Settings icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -120,10 +131,11 @@ const DashboardLayout = () => {
                 </svg>
                 <span className="is-drawer-close:hidden">Settings</span>
               </button>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

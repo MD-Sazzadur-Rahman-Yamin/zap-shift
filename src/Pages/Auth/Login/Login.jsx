@@ -16,7 +16,6 @@ const Login = () => {
 
 
   const handleLogin = (data) => {
-    console.log(data);
 
     loginUser(data.email, data.password)
       .then((result) => {
