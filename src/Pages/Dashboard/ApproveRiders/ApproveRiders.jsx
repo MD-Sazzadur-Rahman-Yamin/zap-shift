@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaTrash, FaUserCheck } from "react-icons/fa";
+import { FaEye, FaTrash, FaUserCheck } from "react-icons/fa";
 import { IoPersonRemoveSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
 
@@ -16,10 +16,10 @@ const ApproveRiders = () => {
   });
 
   const updateRiderStatus = (rider, status) => {
-    console.log(rider)
+    console.log(rider);
     const updatedData = {
       status: status,
-      email:rider.email,
+      email: rider.email,
     };
     axiosSecure.patch(`/riders/${rider._id}`, updatedData).then((res) => {
       if (res.data.modifiedCount) {
@@ -63,6 +63,9 @@ const ApproveRiders = () => {
                 <td>{rider.district}</td>
                 <td>{rider.status}</td>
                 <td className="flex items-center gap-2">
+                  <button className="btn btn-square btn-outline hover:text-base-100">
+                    <FaEye></FaEye>
+                  </button>
                   <button
                     onClick={() => handleApproval(rider)}
                     className="btn btn-square btn-outline hover:text-base-100"

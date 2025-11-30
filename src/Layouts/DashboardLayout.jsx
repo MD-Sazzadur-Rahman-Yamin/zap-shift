@@ -4,6 +4,7 @@ import { GrCreditCard } from "react-icons/gr";
 import { Link, NavLink, Outlet } from "react-router";
 import { LuBike } from "react-icons/lu";
 import { ToastContainer } from "react-toastify";
+import { FaUser } from "react-icons/fa";
 
 const DashboardLayout = () => {
   return (
@@ -96,6 +97,16 @@ const DashboardLayout = () => {
               >
                 <GrCreditCard />
                 <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/user-management"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="User Management"
+              >
+                <FaUser></FaUser>
+                <span className="is-drawer-close:hidden">User Management</span>
               </NavLink>
             </li>
             <li>
