@@ -1,19 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FiShieldOff } from "react-icons/fi";
 import { FaUserShield } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const UserManagement = () => {
+    const [searchUser, setSearchUser] = useState();
   const axiosSecure = useAxiosSecure();
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users",searchUser],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users`);
+      const res = await axiosSecure.get(`/users?searchUser=${searchUser}`);
       return res.data;
     },
   });
+
 
   const handleMakeAdmin = (u) => {
     const roleInfo = { role: "admin" };
@@ -53,6 +55,30 @@ const UserManagement = () => {
   return (
     <div className="page-body">
       <h2 className="page-title">Manage Users: {users.length}</h2>
+      <label className="input">
+        <svg
+          className="h-[1em] opacity-50"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input
+          onChange={(e) => setSearchUser(e.target.value)}
+          type="search"
+          required
+          placeholder="Search user"
+        />
+      </label>
       <div className="overflow-x-auto">
         <table className="table table-xs">
           <thead>{tableHead}</thead>
