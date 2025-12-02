@@ -16,37 +16,42 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const axiosSecure = useAxiosSecure();
-
   const handleRegister = (data) => {
-    const profileImg = data.photo[0];
-    // register user
+    const profileImg = data.image[0];
+
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result);
         // stote the image and gat the url
-        const fromData = new fromData();
-        fromData.append("image", profileImg);
+
+        const formData = new FormData();
+        formData.append("image", profileImg);
+
         const img_api_url = `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_img_host_key
         }`;
-        axios.post(img_api_url, fromData).then((res) => {
+
+        axios.post(img_api_url, formData).then((res) => {
           const photoURL = res.data.data.url;
-          //create user in database
+
           const userInfo = {
             email: data.email,
             displayName: data.name,
             photoURL: photoURL,
           };
-          axiosSecure.post("/users", userInfo).then(res=>{
-            if(res.data.insertedId){
-              console.log('user created in database')
+
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in database");
             }
           });
           //update user profile
+
           const userProfile = {
             displayName: data.name,
             photoURL: photoURL,
           };
+
           updateUserProfile(userProfile).then(() => {
             navigate(location.state || "/");
           });
@@ -56,7 +61,7 @@ const Register = () => {
         console.log(error);
       });
   };
-
+  
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
