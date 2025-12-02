@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useRef } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AssignRiders = () => {
   const axiosSecure = useAxiosSecure();
+  const riderModalRef = useRef();
+
   const { data: parcels = [] } = useQuery({
     queryKey: ["parcels", "pending-pickup"],
     queryFn: async () => {
@@ -13,7 +15,11 @@ const AssignRiders = () => {
       return res.data;
     },
   });
-  console.log(parcels);
+
+  const openAssignRiderModal = (parent) => {
+    riderModalRef.current.showModal();
+  };
+
   const tableTitles = (
     <>
       <tr>
@@ -23,7 +29,6 @@ const AssignRiders = () => {
         <th>Created At</th>
         <th>Pickup Diatrict</th>
         <th>Action</th>
-
       </tr>
     </>
   );
@@ -42,7 +47,12 @@ const AssignRiders = () => {
                 <td>{parcel.createAt}</td>
                 <td>{parcel.senderDistrict}</td>
                 <td>
-                  <button className="btn btn-outline hover:text-base-100">Assign Riders</button>
+                  <button
+                    onClick={() => openAssignRiderModal(parcel)}
+                    className="btn btn-outline hover:text-base-100"
+                  >
+                    Assign Riders
+                  </button>
                 </td>
               </tr>
             ))}
@@ -50,6 +60,23 @@ const AssignRiders = () => {
           <tfoot>{tableTitles}</tfoot>
         </table>
       </div>
+      <dialog
+        ref={riderModalRef}
+        className="modal modal-bottom sm:modal-middle"
+      >
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-outline hover:text-base-100">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
