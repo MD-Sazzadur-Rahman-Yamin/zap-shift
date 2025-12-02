@@ -53,6 +53,7 @@ const MyParcels = () => {
               <th>#</th>
               <th>Parcel Name</th>
               <th>Cost</th>
+              <th>Tracking ID</th>
               <th>Payment</th>
               <th>Delivery Status</th>
               <th>Action</th>
@@ -79,6 +80,7 @@ const MyParcels = () => {
                     </Link>
                   )}
                 </td>
+                <td>{parcel.trackingId}</td>
                 <td>{parcel.deliveryStatus}</td>
                 <td className="flex items-center gap-2">
                   <button className="btn btn-square btn-outline hover:text-base-100">
