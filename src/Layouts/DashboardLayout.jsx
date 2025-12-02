@@ -5,6 +5,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import { LuBike } from "react-icons/lu";
 import { ToastContainer } from "react-toastify";
 import { FaUser } from "react-icons/fa";
+import { CgAssign } from "react-icons/cg";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -125,6 +126,18 @@ const DashboardLayout = () => {
                     <LuBike />
                     <span className="is-drawer-close:hidden">
                       Approve Riders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/assign-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Rider"
+                  >
+                    <CgAssign />
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
                     </span>
                   </NavLink>
                 </li>
