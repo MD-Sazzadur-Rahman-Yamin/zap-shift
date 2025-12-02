@@ -49,7 +49,8 @@ const ApproveRiders = () => {
               <th>Name</th>
               <th>Email</th>
               <th>District</th>
-              <th>Status</th>
+              <th>Application Status</th>
+              <th>work Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -62,6 +63,7 @@ const ApproveRiders = () => {
                 <td>{rider.email}</td>
                 <td>{rider.district}</td>
                 <td>{rider.status}</td>
+                <td>{rider.workStatus}</td>
                 <td className="flex items-center gap-2">
                   <button className="btn btn-square btn-outline hover:text-base-100">
                     <FaEye></FaEye>
