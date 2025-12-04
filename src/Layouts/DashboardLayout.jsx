@@ -6,6 +6,7 @@ import { LuBike } from "react-icons/lu";
 import { ToastContainer } from "react-toastify";
 import { FaTasks, FaUser } from "react-icons/fa";
 import { CgAssign } from "react-icons/cg";
+import { SiGoogletasks } from "react-icons/si";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -116,6 +117,19 @@ const DashboardLayout = () => {
                     <FaTasks></FaTasks>
                     <span className="is-drawer-close:hidden">
                       Assigned deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/completed-deliveries"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed deliveries"
+                  >
+                    <SiGoogletasks />
+
+                    <span className="is-drawer-close:hidden">
+                      Completed deliveries
                     </span>
                   </NavLink>
                 </li>
