@@ -17,14 +17,16 @@ const AssignedDeliveries = () => {
     },
   });
 
-  const handleAcceptDelivery = (parcel) => {
-    const statusInfo = { deliveryStatus: "rider_arriving" };
+  const handleStatusUpdate = (parcel, status) => {
+    const statusInfo = { deliveryStatus: status };
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, statusInfo)
       .then((res) => {
         if (res.data.modifiedCount) {
           refetch();
-          toast.success("Thank you for accepting");
+          toast.success(
+            `Parcel status updated with ${status.split("_").join(" ")}`
+          );
         }
       });
   };
@@ -40,7 +42,7 @@ const AssignedDeliveries = () => {
               <th></th>
               <th>Name</th>
               <th>Conform</th>
-              <th>Favorite Color</th>
+              <th>Other Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -54,11 +56,18 @@ const AssignedDeliveries = () => {
                     <>
                       <button
                         className="btn btn-outline hover:text-base-100"
-                        onClick={() => handleAcceptDelivery(parcel)}
+                        onClick={() =>
+                          handleStatusUpdate(parcel, "rider_arriving")
+                        }
                       >
                         Accept
                       </button>
-                      <button className="btn btn-outline hover:text-base-100">
+                      <button
+                        className="btn btn-outline hover:text-base-100"
+                        // onClick={() =>
+                        //   handleStatusUpdate(parcel, "parcel_picked_up")
+                        // }
+                      >
                         Reject
                       </button>
                     </>
@@ -66,7 +75,24 @@ const AssignedDeliveries = () => {
                     <span>Accepted</span>
                   )}
                 </td>
-                <td>Blue</td>
+                <td>
+                  <button
+                    className="btn btn-outline hover:text-base-100"
+                    onClick={() =>
+                      handleStatusUpdate(parcel, "parcel_picked_up")
+                    }
+                  >
+                    Mark as pickup
+                  </button>
+                  <button
+                    className="btn btn-outline hover:text-base-100"
+                    onClick={() =>
+                      handleStatusUpdate(parcel, "parcel_delivered")
+                    }
+                  >
+                    Mark as delivered
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
